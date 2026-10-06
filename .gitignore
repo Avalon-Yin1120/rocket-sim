@@ -1,0 +1,25 @@
+# ---- 运行时自动生成，不要提交 ----
+# 首次运行 main.py 会自动生成带注释的火箭参数文件；删掉即恢复内置默认值
+rocket_config.json
+# 自动学习的俯仰表与历史；删掉即重置学习
+flight_learn.json
+
+# ---- 遥测导出（tools/flight_test.py --csv）----
+*.csv
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+Desktop.ini

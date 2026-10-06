@@ -1,0 +1,30 @@
+# ============================================================
+#  三级火箭模拟器 · 运行依赖
+# ------------------------------------------------------------
+#  安装：  pip install -r requirements.txt
+#  运行：  python main.py
+#  无头自检（不需要显示器，也不会写文件）：
+#          python tools/orbit_check.py            # 轨道守恒
+#          python tools/moon_orbit_check.py       # 绕月捕获
+#          python tools/flight_test.py            # 整次飞行 + 遥测
+#
+#  Python 版本：3.9 以上（开发与全部验证都在 3.13.1 上完成）。
+#  其余 import —— math / json / os / sys / random / argparse —— 都是标准库，
+#  不需要安装。
+# ============================================================
+
+# ---- 图形与输入 ----
+# 代码里只 `import pygame`，不关心你装的是原版还是社区版。
+# 下面这行是开发与验证时用的发行版；两个包提供同一个 pygame 模块，
+# **不要同时安装**，否则会互相覆盖文件。
+# 已经装有原版 pygame 的话，把下面这行换成： pygame>=2.1
+# 版本下限 2.x 是因为用到了 pygame.MOUSEWHEEL（2.0 起）与 SRCALPHA 表面。
+pygame-ce>=2.5,<3
+
+# ---- 物理库 ----
+# 说明：当前代码只把它当"位置/速度容器"用（pymunk.Body / pymunk.Vec2d），
+# 从未调用 space.step()，撞击、约束、求解器一个都没用上——受力与积分全是自己写的。
+# 它出现在这里只是因为 physics/rocket.py 里 import 了它；
+# 移除这个依赖属于待办事项（见 README「13. 已知限制」）。
+# Python 3.13 需要 6.6 及以上才有预编译轮子。
+pymunk>=6.6,<7

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 语法检查
+        run: python -m compileall -q .
+
+      # 下面三个脚本都是无头的：只 import config 与 physics，
+      # 不打开窗口、不写文件，所以能在 CI 里直接跑。
+      - name: 地球轨道守恒自检
+        run: python tools/orbit_check.py --dur 120
+
+      - name: 绕月捕获自检
+        run: python tools/moon_orbit_check.py --perilune 2000 --max-t 120000
+
+      - name: 整次飞行冒烟测试（轻型三级入轨）
+        run: python tools/flight_test.py --preset light --max-t 9000

@@ -1,0 +1,12 @@
+# 统一按 LF 存取：这个项目在 Windows 上开发，早期文件是 CRLF、后加的却是 LF，
+# 不定这个属性的话每次跨平台改动都会整文件飘红。
+* text=auto eol=lf
+
+# 二进制文件不要碰
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.ttc binary
